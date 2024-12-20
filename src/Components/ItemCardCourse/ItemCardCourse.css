@@ -1,0 +1,29 @@
+    .item-submission {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+    }
+
+    .item-submission:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .item-submission.graded {
+        background-color: #e9f7ef;
+        border: 1px solid #28a745;
+    }
+
+    .item-submission.ungraded {
+        background-color: #fce8e8;
+        border: 1px solid #dc3545;
+    }
+
+    .item-submission p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #555;
+    }
