@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ItemCardCourse.css';
-import SideBar from '../SideBar/SideBar';
 import { Link } from 'react-router-dom';
 
-
-const ItemCardCourse = ({ submission, index }) => {
+const ItemCardCourse = ({ course, index }) => {
     return (
-        <Link to={`/dashboard/detail-submission/${index}`} key={index} className={`item-submission ${submission.isGraded ? 'graded' : 'ungraded'}`} >
-            <p><strong>Học viên:</strong> {submission.studentName}</p>
-            <p><strong>Bài Kiểm Tra:</strong> {submission.lessonName}</p>
-            <p><strong>Khóa học:</strong> {submission.courseName}</p>
+        <Link to={`/dashboard/detail-submission/${index}`} key={index} className="item-submission">
+            <img src={course.imageUrl} alt={course.courseName} className="submission-image" />
+            <div className="submission-details">
+                <p><strong>ID Khóa Học:</strong> {course.courseId}</p>
+                <p><strong>Tên Khóa Học:</strong> {course.courseName}</p>
+                <p><strong>Loại khóa học:</strong> {course.category}</p>
+                <p><strong>Số lượng bài học:</strong> {course.lessonCount}</p>
+                <p><strong>Giảng Viên:</strong> {course.instructor}</p>
+            </div>
         </Link>
     );
 };

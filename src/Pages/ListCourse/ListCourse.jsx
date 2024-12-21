@@ -2,58 +2,45 @@ import React, { useState } from 'react';
 import './ListCourse.css';
 import SideBar from '../../Components/SideBar/SideBar';
 import ItemCardCourse from '../../Components/ItemCardCourse/ItemCardCourse';
+import tb1 from '../../Assets/Image/thumbnail1.jpg';
+import tb2 from '../../Assets/Image/thumbnail2.jpg';
+import tb3 from '../../Assets/Image/thumbnail3.jpg';
+import tb4 from '../../Assets/Image/thumbnail4.jpg';
+import tb5 from '../../Assets/Image/thumbnail5.jpg';
+import tb6 from '../../Assets/Image/thumbnail6.jpg';
+import PopupAddCourse from '../../Components/PopupAddCourse/PopupAddCourse';
+import Pagination from '../../Components/Pagination/Pagination';
 
-const submissions = [
-  { studentName: 'Nguyễn Minh Anh', lessonName: 'Speaking Practice 1', courseName: 'English for Beginners', isGraded: true, typeSubmission: "speaking" },
-  { studentName: 'Trần Mai Nhi', lessonName: 'Grammar Exercise 4', courseName: 'Advanced English Grammar', isGraded: false, typeSubmission: "speaking" },
-  { studentName: 'Lê Hoàng Nam', lessonName: 'Business Writing Techniques 7', courseName: 'English for Business', isGraded: false, typeSubmission: "writing" },
-  { studentName: 'Phạm Thu Phương', lessonName: 'Conversation Skills 2', courseName: 'Conversational English', isGraded: false, typeSubmission: "writing" },
-  { studentName: 'Trần Duy Đức', lessonName: 'Speaking Practice 1', courseName: 'English for Beginners', isGraded: true, typeSubmission: "writing" },
-  { studentName: 'Phan Thanh Tùng', lessonName: 'Travel English Vocabulary 3', courseName: 'English for Travel', isGraded: true, typeSubmission: "writing" },
-  { studentName: 'Trần Thảo Nhi', lessonName: 'Grammar Exercise 4', courseName: 'Advanced English Grammar', isGraded: false, typeSubmission: "writing" },
-  { studentName: 'Nguyễn Thị Linh', lessonName: 'IELTS Speaking Simulation 5', courseName: 'IELTS Preparation', isGraded: false, typeSubmission: "speaking" },
-  { studentName: 'Vũ Hồng Quân', lessonName: 'Business English Presentation 6', courseName: 'English for Business', isGraded: true, typeSubmission: "speaking" },
-  { studentName: 'Lê Thanh Mai', lessonName: 'Advanced Grammar Review 7', courseName: 'Advanced English Grammar', isGraded: false, typeSubmission: "speaking" },
-  { studentName: 'Nguyễn Phương Linh', lessonName: 'IELTS Speaking Simulation 5', courseName: 'IELTS Preparation', isGraded: false, typeSubmission: "speaking" },
-  { studentName: 'Đặng Minh Quân', lessonName: 'Business English Presentation 6', courseName: 'English for Business', isGraded: true, typeSubmission: "speaking" },
-  { studentName: 'Lê Thanh Hoa', lessonName: 'Advanced Grammar Review 7', courseName: 'Advanced English Grammar', isGraded: false, typeSubmission: "speaking" },
-  { studentName: 'Nguyễn Khánh Linh', lessonName: 'IELTS Writing Task 5', courseName: 'IELTS Preparation', isGraded: false, typeSubmission: "writing" },
-  { studentName: 'Phạm Duy Hải', lessonName: 'Business English Email Writing 6', courseName: 'English for Business', isGraded: true, typeSubmission: "writing" },
-  { studentName: 'Phạm Phương Mai', lessonName: 'Advanced Writing Skills 7', courseName: 'Advanced English Grammar', isGraded: false, typeSubmission: "writing" },
-  { studentName: 'Nguyễn Phương Hằng', lessonName: 'IELTS Writing Task 5', courseName: 'IELTS Preparation', isGraded: false, typeSubmission: "writing" },
-  { studentName: 'Vũ Hồng Quân', lessonName: 'Business English Email Writing 6', courseName: 'English for Business', isGraded: true, typeSubmission: "writing" },
-  { studentName: 'Phạm Thu Hương', lessonName: 'Conversational English Skills 2', courseName: 'Conversational English', isGraded: false, typeSubmission: "speaking" },
-  { studentName: 'Hoàng Gia Bảo', lessonName: 'Travel English Dialogue 3', courseName: 'English for Travel', isGraded: true, typeSubmission: "speaking" },
+const initialCourses = [
+  { courseId: "C001", courseName: "Mastering English Grammar", category: "Writing", lessonCount: 20, instructor: "John Smith", imageUrl: tb1 },
+  { courseId: "C002", courseName: "Effective Communication Skills", category: "Speaking", lessonCount: 15, instructor: "Sarah Johnson", imageUrl: tb2 },
+  { courseId: "C003", courseName: "Academic Reading Strategies", category: "Reading", lessonCount: 18, instructor: "Emily Brown", imageUrl: tb3 },
+  { courseId: "C004", courseName: "Listening Comprehension for TOEFL", category: "Listening", lessonCount: 25, instructor: "Michael Williams", imageUrl: tb4 },
+  { courseId: "C005", courseName: "Creative Writing Workshop", category: "Writing", lessonCount: 12, instructor: "Anna Davis", imageUrl: tb5 },
+  { courseId: "C006", courseName: "Public Speaking Mastery", category: "Speaking", lessonCount: 10, instructor: "David Wilson", imageUrl: tb6 }
 ];
 
-
-
-const ListCourse = ({ type }) => {
-  const [filter, setFilter] = useState('all');
+const ListCourse = () => {
+  const [courses, setCourses] = useState(initialCourses);
+  const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-
-  const handleFilterChange = (event) => setFilter(event.target.value);
-
-  const typeSubmission = submissions.filter((submission) => {
-    if (type === null) {
-      return true
-    }
-    else {
-      return submission.typeSubmission === type
-    }
-  })
-  console.log(typeSubmission)
-
-  const filteredSubmissions = submissions.filter((submission) => {
-    if (filter === 'graded') return submission.isGraded;
-    if (filter === 'ungraded') return !submission.isGraded;
-    return true;
+  const [showPopup, setShowPopup] = useState(false);
+  const [newCourse, setNewCourse] = useState({
+    courseId: '',
+    courseName: '',
+    category: '',
+    lessonCount: '',
+    instructor: '',
+    imageUrl: null
   });
-  
 
-  const itemsPerPage = 8;
-  const totalPages = Math.ceil(filteredSubmissions.length / itemsPerPage);
-  const currentSubmissions = filteredSubmissions.slice(
+  const itemsPerPage = 6;
+  const filteredCourses = courses.filter(course =>
+    course.courseName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
+  const currentCourses = filteredCourses.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -62,45 +49,77 @@ const ListCourse = ({ type }) => {
     if (direction === 'next' && currentPage < totalPages) setCurrentPage(currentPage + 1);
     if (direction === 'prev' && currentPage > 1) setCurrentPage(currentPage - 1);
   };
-  console.log(currentSubmissions);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewCourse(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setNewCourse(prev => ({ ...prev, imageUrl: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSaveCourse = () => {
+    if (newCourse.courseId && newCourse.courseName && newCourse.category && newCourse.lessonCount && newCourse.instructor) {
+      setCourses(prev => [newCourse, ...prev]);
+      setShowPopup(false);
+      setNewCourse({ courseId: '', courseName: '', category: '', lessonCount: '', instructor: '', imageUrl: null });
+    } else {
+      alert('Please fill out all fields!');
+    }
+  };
 
   return (
     <div className='submission-list-container'>
       <SideBar />
+
       <div className="submission-list">
-        {/* Tiêu đề và filter */}
+        {/* Tiêu đề, thanh search, nút tạo khóa học */}
         <div className="header-submission-list">
-          <h2>Danh sách bài làm</h2>
-          <select className="filter-dropdown" value={filter} onChange={handleFilterChange}>
-            <option value="all">Tất cả</option>
-            <option value="graded">Đã chấm</option>
-            <option value="ungraded">Chưa chấm</option>
-          </select>
+          <h2>Danh sách khóa học</h2>
+          <input
+            type="text"
+            placeholder="Tìm kiếm khóa học..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-bar"
+          />
+          <button className="create-course-btn" onClick={() => setShowPopup(true)}>
+            Tạo khóa học
+          </button>
         </div>
 
-        {/* Danh sách bài làm */}
+        {/* Danh sách khóa học */}
         <div className="items-grid">
-          {currentSubmissions.map((submission, index) => (
-            <ItemCardCourse submission={submission} index={index} />
+          {currentCourses.map((course, index) => (
+            <ItemCardCourse course={course} key={index} />
           ))}
         </div>
 
         {/* Nút chuyển trang */}
-        <div className="pagination">
-          <button onClick={() => handlePageChange('prev')} disabled={currentPage === 1}>
-            Trang trước
-          </button>
-          <span>
-            Trang {currentPage} / {totalPages}
-          </span>
-          <button onClick={() => handlePageChange('next')} disabled={currentPage === totalPages}>
-            Trang sau
-          </button>
-        </div>
+        <Pagination currentPage={currentPage}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+        />
+
+        {/* Popup thêm khóa học */}
+        {showPopup && (
+          <PopupAddCourse newCourse={newCourse}
+            handleInputChange={handleInputChange}
+            handleImageUpload={handleImageUpload}
+            handleSaveCourse={handleSaveCourse}
+            setShowPopup={setShowPopup}
+          />
+        )}
       </div>
     </div>
-
-
   );
 };
 

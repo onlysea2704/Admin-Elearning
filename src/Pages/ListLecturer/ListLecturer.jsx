@@ -6,6 +6,7 @@ import av from '../../Assets/Image/BG.png'
 import av1 from '../../Assets/Image/BG1.png'
 import av2 from '../../Assets/Image/BG2.png'
 import av3 from '../../Assets/Image/BG3.png'
+import Pagination from '../../Components/Pagination/Pagination';
 
 const lecturers = [
   { id: '10001', name: 'Nguyễn Văn Hải Đăng', email: 'haidung@gmail.com', avatar: av },
@@ -32,6 +33,7 @@ const ListLecturer = () => {
       direction === 'next' ? prevPage + 1 : Math.max(prevPage - 1, 1)
     );
   };
+  const totalPages = Math.ceil(lecturers.length / itemsPerPage);
 
   const paginatedlecturers = lecturers.slice(
     (currentPage - 1) * itemsPerPage,
@@ -48,20 +50,12 @@ const ListLecturer = () => {
             <ItemCardLecturer lecturer={lecturer}/>
           ))}
         </div>
-        <div className="pagination">
-          <button
-            onClick={() => handlePageChange('prev')}
-            disabled={currentPage === 1}
-          >
-            Trước
-          </button>
-          <button
-            onClick={() => handlePageChange('next')}
-            disabled={currentPage * itemsPerPage >= lecturers.length}
-          >
-            Tiếp
-          </button>
-        </div>
+
+        <Pagination currentPage={currentPage}
+        totalPages={totalPages}
+        handlePageChange={handlePageChange}
+        />
+
       </div>
     </div>
 
