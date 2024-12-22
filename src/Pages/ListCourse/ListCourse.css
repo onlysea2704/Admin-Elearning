@@ -44,6 +44,12 @@
   transition: background-color 0.3s ease;
 }
 
+.create-course-btn i {
+  margin-right: 8px;
+  font-size: 14px;
+  color: white;
+}
+
 .create-course-btn:hover {
   background-color: #0056b3;
 }
@@ -62,4 +68,3 @@
   border-color: #007bff;
   outline: none;
 }
-

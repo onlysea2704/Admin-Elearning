@@ -54,10 +54,13 @@
     font-size: 14px;
     box-sizing: border-box;
 }
+#imageUpload{
+    padding: 7px;
+}
 
 .uploaded-image {
-    margin-top: 10px;
-    height: 120px;
+    margin-top: 0px;
+    height: 137px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }

@@ -92,6 +92,7 @@ const ListCourse = () => {
             className="search-bar"
           />
           <button className="create-course-btn" onClick={() => setShowPopup(true)}>
+            <i className="fas fa-plus"></i>
             Tạo khóa học
           </button>
         </div>
