@@ -11,40 +11,6 @@
     box-sizing: border-box;
 }
 
-.header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.btn-back {
-    padding: 10px 15px;
-    background-color: #1e3a8a;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 18px;
-}
-
-.btn-back:hover {
-    background-color: #315ca7;
-}
-
-.divider {
-    width: 2px;
-    height: 30px;
-    background-color: #ddd;
-    margin: 0 15px;
-}
-
-.header-title {
-    color: #1e3a8a;
-    font-size: 20px;
-    margin: 0;
-}
-
 .manage-course-content {
     display: flex;
     gap: 20px;
@@ -85,7 +51,7 @@
 
 .course-image {
     width: 350px;
-    height: 250px;
+    height: 260px;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
@@ -98,19 +64,19 @@
     flex: 1;
 }
 
-.form-group {
+.form-group-course {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
 
-.form-group label {
+.form-group-course label {
     flex: 0 0 120px;
     font-weight: bold;
     color: #1e3a8a;
 }
 
-.form-group input,
+.form-group-course input,
 textarea {
     flex: 1;
     padding: 8px;
@@ -120,13 +86,13 @@ textarea {
 
 }
 
-textarea {
+.course-textarea {
     resize: none;
     width: 100%;
     height: 120px;
 }
 
-.info-group {
+.info-group-course {
     display: flex;
     justify-content: space-between;
     color: #1e3a8a;
@@ -134,7 +100,7 @@ textarea {
     margin-top: 10px;
 }
 
-.info-group .icon {
+.info-group-course .icon {
     margin-right: 5px;
 }
 

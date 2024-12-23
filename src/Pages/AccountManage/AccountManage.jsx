@@ -27,7 +27,7 @@ const AccountManage = () => {
                     <Link to='/' className="logout-link">Đăng xuất</Link>
                     <form className="change-password-form" onSubmit={handleSubmit}>
                         <h2>Thay đổi mật khẩu</h2>
-                        {message && <p className={`message ${message.includes("successfully") ? "success" : "error"}`}>{message}</p>}
+                        
                         <div className="form-group-change-pass">
                             <label>Mật khẩu hiện tại</label>
                             <input
@@ -58,6 +58,7 @@ const AccountManage = () => {
                                 required
                             />
                         </div>
+                        {message && <p className={`message ${message.includes("successfully") ? "success" : "error"}`}>{message}</p>}
                         <button type="submit" className="submit-btn">Cập nhật mật khẩu</button>
                     </form>
                 </div>

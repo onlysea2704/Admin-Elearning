@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./ManageCourse.css";
 import SideBar from "../../Components/SideBar/SideBar";
 import ListLesson from "../../Components/ListLesson/ListLesson";
+import { Link, useNavigate } from "react-router-dom";
+import HeaderBackButton from "../../Components/HeaderBackButton/HeaderBackButton";
 
 const ManageCourse = () => {
     const [courseImage, setCourseImage] = useState("https://via.placeholder.com/300x200");
-
+    const navigate = useNavigate();
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -25,23 +27,32 @@ const ManageCourse = () => {
         console.log(`Xóa bài học ${lessonId}`);
     };
 
+    const handleCreateLesson = () => {
+        window.alert("Bạn có muốn tạo Lesson?");
+        navigate('/dashboard/manage-video-lesson'); // Thay bằng đường dẫn cần chuyển hướng
+    };
+
+    const handleCreateQuiz = () => {
+        window.alert("Bạn có muốn tạo Quiz?");
+        navigate('/dashboard/manage-quiz/0'); // Thay bằng đường dẫn cần chuyển hướng
+    };
+
     return (
         <div className="page-course-manage">
             <SideBar />
             <div className="manage-course-container">
+
                 {/* Header */}
-                <div className="header">
-                    <button className="btn-back">Quay lại danh sách</button>
-                    <div className="divider"></div>
-                    <h1 className="header-title">Quản Lý Khóa Học</h1>
-                </div>
+                <HeaderBackButton
+                    button='Quay lại danh sách'
+                    title='Quản Lý Khóa Học'
+                    dest='/dashboard/list-course'
+                />
 
                 <div className="manage-course-content">
                     {/* Left Section */}
                     <div className="course-details">
                         <div className="course-header">
-
-
                             <div className="course-image-container">
                                 <label htmlFor="upload-image">
                                     <img
@@ -61,27 +72,27 @@ const ManageCourse = () => {
 
 
                             <div className="course-info">
-                                <div className="form-group">
+                                <div className="form-group-course">
                                     <label>ID</label>
                                     <input type="text" value="12345" disabled />
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group-course">
                                     <label>Tên Khóa Học</label>
                                     <input type="text" placeholder="Nhập tên khóa học" />
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group-course">
                                     <label>Giá</label>
                                     <input type="number" placeholder="Nhập giá khóa học" />
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group-course">
                                     <label>Tên Giảng Viên</label>
                                     <input type="text" placeholder="Nhập tên giảng viên" />
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group-course">
                                     <label>Loại Bài Học</label>
                                     <input type="text" placeholder="Nhập loại bài học" />
                                 </div>
-                                <div className="info-group">
+                                <div className="info-group-course">
                                     <span>
                                         <i className="fas fa-user-graduate icon"></i> Sinh Viên: 100
                                     </span>
@@ -91,10 +102,10 @@ const ManageCourse = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="form-group">
+                        <div className="form-group-course">
                             <label>Mô Tả Chi Tiết:</label>
                         </div>
-                        <textarea rows="5" placeholder="Nhập mô tả chi tiết"></textarea>
+                        <textarea className="course-textarea" rows="5" placeholder="Nhập mô tả chi tiết"></textarea>
                         <button className="btn-save">Lưu</button>
                     </div>
 
@@ -102,6 +113,8 @@ const ManageCourse = () => {
                     <ListLesson
                         handleEditLesson={handleEditLesson}
                         handleDeleteLesson={handleDeleteLesson}
+                        handleCreateLesson={handleCreateLesson}
+                        handleCreateQuiz={handleCreateQuiz}
                     />
                 </div>
             </div>

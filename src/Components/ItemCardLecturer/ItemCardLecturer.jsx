@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const ItemCardLecturer = ({ lecturer }) => {
 
     return (
-        <Link to='/dashboard/profile-edit' className="student-item" key={lecturer.id}>
+        <Link to='/dashboard/manage-teacher' className="student-item" key={lecturer.id}>
             <img src={lecturer.avatar} alt={lecturer.name} className="student-avatar" />
             <div className="student-info">
                 <h3 className="student-name">{lecturer.name}</h3>

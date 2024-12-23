@@ -11,9 +11,9 @@ const SideBar = () => {
     const path = location.pathname;
     if (path.includes('/dashboard/account-manage')) {
       setActiveSection('account');
-    } else if (path.includes('/dashboard/teacher-manage')) {
+    } else if (path.includes('/dashboard/list-teacher') || path.includes('/dashboard/manage-teacher')) {
       setActiveSection('teacher');
-    } else if (path.includes('/dashboard/course-manage')) {
+    } else if (path.includes('/dashboard/list-course') || path.includes('/dashboard/manage-course') || path.includes('/dashboard/manage-video-lesson') || path.includes('/dashboard/manage-quiz')) {
       setActiveSection('course');
     } else if (path.includes('/dashboard/report')) {
       setActiveSection('report');
@@ -33,13 +33,13 @@ const SideBar = () => {
           </Link>
         </li>
         <li className={activeSection === 'teacher' ? 'active' : ''}>
-          <Link to='/dashboard/teacher-manage'>
+          <Link to='/dashboard/list-teacher'>
             <i className="fas fa-chalkboard-teacher icon"></i>
             Quản lý giảng viên
           </Link>
         </li>
         <li className={activeSection === 'course' ? 'active' : ''}>
-          <Link to='/dashboard/course-manage'>
+          <Link to='/dashboard/list-course'>
             <i className="fas fa-book icon"></i>
             Quản lý khóa học
           </Link>

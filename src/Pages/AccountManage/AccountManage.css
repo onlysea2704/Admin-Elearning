@@ -25,7 +25,7 @@
 
 .change-password-form .h2 {
     text-align: center;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.6rem;
     color: #003366;
     font-size: 1.8rem;
     font-weight: bold;
@@ -57,7 +57,7 @@
 
 /* Form Groups */
 .form-group-change-pass {
-    margin-bottom: 1.5rem;
+    margin-bottom: 19px;
 }
 
 .form-group-change-pass label {
@@ -105,10 +105,11 @@ input:focus {
 
 /* Message Styling */
 .message {
-    text-align: center;
-    margin-bottom: 1rem;
-    font-weight: bold;
-    font-size: 1rem;
+    text-align: left;
+    /* margin-bottom: 1rem; */
+    margin-top: -10px;
+    /* font-weight: bold; */
+    font-size: 14px;
 }
 
 .message.error {

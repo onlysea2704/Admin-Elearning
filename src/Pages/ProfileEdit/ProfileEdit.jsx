@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import "./ProfileEdit.css";
 import SideBar from "../../Components/SideBar/SideBar";
 import { Link } from "react-router-dom";
+import HeaderBackButton from "../../Components/HeaderBackButton/HeaderBackButton";
 
 const ProfileEdit = () => {
     const [profile, setProfile] = useState({
@@ -52,11 +53,11 @@ const ProfileEdit = () => {
                 <SideBar />
                 <div className="page-edit-profile-left">
 
-                    <div className="page-edit-profile-header">
-                        <Link to='/dashboard/teacher-manage' className="button-back-list">Danh Sách Giảng Viên</Link>
-                        <div className="vertical-divider"></div>
-                        <div className="page-edit-title">Edit Profile</div>
-                    </div>
+                    <HeaderBackButton
+                        button='Danh Sách Giảng Viên'
+                        title='Quản lý thông tin giảng viên'
+                        dest='/dashboard/list-teacher'
+                    />
 
                     <div className="container-edit-profile">
                         {/* Avatar Section */}

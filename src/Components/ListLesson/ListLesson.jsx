@@ -1,7 +1,10 @@
 import React from "react";
 import './ListLesson.css'
+import { Link, useNavigate } from "react-router-dom";
 
-const ListLesson = ({handleEditLesson, handleDeleteLesson}) => {
+const ListLesson = ({ handleCreateLesson, handleCreateQuiz, handleEditLesson, handleDeleteLesson }) => {
+    
+
     return (
         <>
             <div className="lesson-list">
@@ -11,10 +14,10 @@ const ListLesson = ({handleEditLesson, handleDeleteLesson}) => {
                         <div key={index} className="lesson-item">
                             Lesson {index + 1}
                             <div className="lesson-icons">
-                                <i
-                                    className="fas fa-edit edit-icon"
-                                    onClick={() => handleEditLesson(index + 1)}
-                                ></i>
+                                <Link to={index % 2 === 0 ? `/dashboard/manage-quiz/${index+1}` : '/dashboard/manage-video-lesson'}>
+                                    <i className="fas fa-edit edit-icon" onClick={() => handleEditLesson(index + 1)}>
+                                    </i>
+                                </Link>
                                 <i
                                     className="fas fa-trash delete-icon"
                                     onClick={() => handleDeleteLesson(index + 1)}
@@ -24,8 +27,8 @@ const ListLesson = ({handleEditLesson, handleDeleteLesson}) => {
                     ))}
                 </div>
                 <div className="lesson-actions">
-                    <button className="btn-create">Tạo Lesson</button>
-                    <button className="btn-create">Tạo Quiz</button>
+                    <button className="btn-create" onClick={handleCreateLesson}>Tạo Lesson</button>
+                    <button className="btn-create" onClick={handleCreateQuiz}>Tạo Quiz</button>
                 </div>
             </div>
         </>
